@@ -73,6 +73,9 @@ class World:
     def getYDimension(self):
         return self.yDimension
 
+    def lookAtLocation(self):
+        return self.grid[y][x]
+
     def addLifeForm(self, creature, x, y):
         '''Method adds the life-form to our list and the position where it should
         be placed'''
@@ -86,6 +89,18 @@ class World:
     def moveLifeForm(self, oldx, oldy, newx, newy):
         self.grid[newy][newx] = self.grid[oldy][oldx]
         self.grid[oldy][oldx] = None
+
+    def emptyLocation(self, x,y):
+        if self.grid[y][x] == None:
+            return True
+        else:
+            return False
+
+    def lifeTime(self):
+        if self.lifeForms != [ ]:
+            creature = random.randrange(len(self.lifeForms))
+            randomCreature = self.lifeForms[creature]
+            randomCreature.lifeTime()
 
     def delLifeForm(self, creature):
         creature.hide()
