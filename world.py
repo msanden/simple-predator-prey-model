@@ -77,8 +77,10 @@ class World:
         return self.grid[y][x]
 
     def addLifeForm(self, creature, x, y):
-        '''Method adds the life-form to our list and the position where it should
-        be placed'''
+        '''
+        Method adds the life-form to our list and the position where it should
+        be placed
+        '''
         creature.setX(x)
         creature.setY(y)
         self.grid[y][x] = creature
