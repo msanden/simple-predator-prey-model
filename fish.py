@@ -21,13 +21,32 @@ class Fish:
         self.breedTick = 0
 
 # Accessor methods to interact with Fish objects.
-# "getting" and "setting" values.
-    def setX(self, newx):
-        self.xpos = newx
-    def setY(self, newy):
-        self.ypos = newy
-
+# "getting" values.
     def getX(self):
         return self.xpos
     def getY(self):
         return self.ypos
+
+# Mutator methods ("setting" values) to interact with Fish objects
+# and allow basic Turtle function
+    def setX(self, newx):
+        self.xpos = newx
+    def setY(self, newy):
+        self.ypos = newy
+    def setWorld(self, aworld):
+        self.world = aworld
+
+    def appear(self):
+        self.turtle.goto(self.xpos, self.ypos)
+        self.turtle.showturtle()
+
+    def hide(self):
+        self.turtle.hideturtle()
+
+    def move(self, newx, newy):
+        self.world.moveLifeForm(self.xpos, self.ypos, newx, newy)
+        self.xpos =  newx
+        self.ypos =  newy
+        self.turtle.goto(self.xpos, self.ypos)
+
+    
