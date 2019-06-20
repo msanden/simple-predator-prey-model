@@ -75,3 +75,41 @@ class Fish:
             if self.breedTick >= 12:
                 self.tryToBreed()
             self.tryToMove()
+
+    def tryToBreed(self):
+        offsetList = [(-1,1), (0,1), (1,1),
+                      (-1,0),        (1,0),
+                      (-1,-1),(0,-1),(1,-1)]
+        randomOffsetIndex = random.randrange(len(offsetList))
+        randomOffset = offsetList[randomOffsetIndex]
+        nextx = self.xpos + randomOffset[0]
+        nexty = self.xpos + randomOffset[1]
+        while not (0 <= nextx < self.world.getXDimension() and
+                   0 <= nexty < self.world.getYDimension() ):
+                   randomOffsetIndex = random.randrange(len(offsetList))
+                   randomOffset = offsetList[randomOffsetIndex]
+                   nextx = self.xpos + randomOffset[0]
+                   nexty = self.xpos + randomOffset[1]
+
+        if self.world.emptyLocation(nextx, nexty):
+            childFish = Fish()
+            self.world.addLifeForm(childFish, nextx, nexty)
+            self.breedTick = 0
+
+    def tryToMove(self):
+        offsetList = [(-1,1), (0,1), (1,1),
+                      (-1,0),        (1,0),
+                      (-1,-1),(0,-1),(1,-1)]
+        randomOffsetIndex = random.randrange(len(offsetList))
+        randomOffset = offsetList[randomOffsetIndex]
+        nextx = self.xpos + randomOffset[0]
+        nexty = self.xpos + randomOffset[1]
+        while not (0 <= nextx < self.world.getXDimension() and
+                   0 <= nexty < self.world.getYDimension() ):
+                   randomOffsetIndex = random.randrange(len(offsetList))
+                   randomOffset = offsetList[randomOffsetIndex]
+                   nextx = self.xpos + randomOffset[0]
+                   nexty = self.xpos + randomOffset[1]
+
+        if self.world.emptyLocation(nextx, nexty):
+            self.move(nextx, nexty)
