@@ -1,4 +1,5 @@
 import cTurtle
+import random
 from world import *
 
 class Fish:
@@ -12,7 +13,7 @@ class Fish:
         self.turtle = cTurtle.Turtle()
         self.turtle.up()
         self.turtle.hideturtle()
-        self.turtle.shape("Fish.gif")
+        self.turtle.shape("fish.gif")
 
         self.xpos = 0
         self.ypos = 0
@@ -62,10 +63,8 @@ class Fish:
         for offset in offsetList:
             newx = self.xpos + offset[0]
             newy = self.ypos + offset[1]
-            if 0 <= newx < self.world.getXDimension() and
-               0 <= newx < self.world.getYDimension():
-               if (not self.world.emptyLocation(newx,newy)) and
-                  isinstance(self.world.lookAtLocation(newx, newy, Fish)):
+            if 0 <= newx < self.world.getXDimension() and 0 <= newy < self.world.getYDimension():
+               if (not self.world.emptyLocation(newx,newy)) and isinstance(self.world.lookAtLocation(newx, newy, Fish)):
                    adjfish = adjfish + 1
 
         if adjfish >= 2:
