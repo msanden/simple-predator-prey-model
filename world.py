@@ -1,4 +1,5 @@
 import cTurtle
+import random
 
 class World:
     def __init__(self, xDimension, yDimension):
@@ -92,14 +93,17 @@ class World:
         self.grid[newy][newx] = self.grid[oldy][oldx]
         self.grid[oldy][oldx] = None
 
-    def emptyLocation(self, x,y):
+    def emptyLocation(self, x, y):
         if self.grid[y][x] == None:
             return True
         else:
             return False
 
     def liveLife(self):
-    '''A creature is selected at random, then allowed to live life (breed)'''
+        '''
+        A creature is selected at random, then allowed to live life
+        (breed).
+        '''
         if self.lifeForms != [ ]:
             creature = random.randrange(len(self.lifeForms))
             randomCreature = self.lifeForms[creature]
