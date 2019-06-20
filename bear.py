@@ -1,4 +1,6 @@
 import cTurtle
+import random
+
 from world import *
 from fish import *
 
@@ -17,7 +19,7 @@ class Bear:
         self.turtle = cTurtle.Turtle()
         self.turtle.up()
         self.turtle.hideturtle()
-        self.turtle.shape("Bear.gif")
+        self.turtle.shape("bear.gif")
 
     def liveLife(self):
         self.breedTick = self.breedTick + 1
@@ -39,10 +41,8 @@ class Bear:
         for offset in offsetList:
             newx = self.xpos + offset[0]
             newy = self.ypos + offset[1]
-            if 0 <= newx < self.world.getXDimension() and
-               0 <= newx < self.world.getYDimension():
-               if (not self.world.emptyLocation(newx,newy)) and
-               isinstance(self.world.lookAtLocation(newx, newy, Fish)):
+            if 0 <= newx < self.world.getXDimension() and 0 <= newy < self.world.getYDimension():
+               if (not self.world.emptyLocation(newx,newy)) and isinstance(self.world.lookAtLocation(newx, newy, Fish)):
                    adjprey.append(self.world.lookAtLocation(newx, newy))
 
         if len(adjprey) > 0:
@@ -55,4 +55,3 @@ class Bear:
             self.starveTick = 0
         else:
             self.starveTick = self.starveTick + 1
-            
