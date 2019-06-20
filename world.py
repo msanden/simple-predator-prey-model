@@ -73,7 +73,7 @@ class World:
     def getYDimension(self):
         return self.yDimension
 
-    def lookAtLocation(self):
+    def lookAtLocation(self, x, y):
         return self.grid[y][x]
 
     def addLifeForm(self, creature, x, y):
@@ -98,11 +98,12 @@ class World:
         else:
             return False
 
-    def lifeTime(self):
+    def liveLife(self):
+    '''A creature is selected at random, then allowed to live life (breed)'''
         if self.lifeForms != [ ]:
             creature = random.randrange(len(self.lifeForms))
             randomCreature = self.lifeForms[creature]
-            randomCreature.lifeTime()
+            randomCreature.livelife()
 
     def delLifeForm(self, creature):
         creature.hide()
