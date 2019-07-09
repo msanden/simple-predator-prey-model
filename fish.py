@@ -13,7 +13,7 @@ class Fish:
         self.turtle = cTurtle.Turtle()
         self.turtle.up()
         self.turtle.hideturtle()
-        self.turtle.shape("fish.gif")
+        self.turtle.shape("img/fish.gif")
 
         self.xpos = 0
         self.ypos = 0
@@ -64,7 +64,7 @@ class Fish:
             newx = self.xpos + offset[0]
             newy = self.ypos + offset[1]
             if 0 <= newx < self.world.getXDimension() and 0 <= newy < self.world.getYDimension():
-               if (not self.world.emptyLocation(newx,newy)) and isinstance(self.world.lookAtLocation(newx, newy, Fish)):
+               if (not self.world.emptyLocation(newx,newy)) and isinstance(self.world.lookAtLocation(newx, newy), Fish):
                    adjfish = adjfish + 1
 
         if adjfish >= 2:
@@ -82,13 +82,13 @@ class Fish:
         randomOffsetIndex = random.randrange(len(offsetList))
         randomOffset = offsetList[randomOffsetIndex]
         nextx = self.xpos + randomOffset[0]
-        nexty = self.xpos + randomOffset[1]
+        nexty = self.ypos + randomOffset[1]
         while not (0 <= nextx < self.world.getXDimension() and
                    0 <= nexty < self.world.getYDimension() ):
                    randomOffsetIndex = random.randrange(len(offsetList))
                    randomOffset = offsetList[randomOffsetIndex]
                    nextx = self.xpos + randomOffset[0]
-                   nexty = self.xpos + randomOffset[1]
+                   nexty = self.ypos + randomOffset[1]
 
         if self.world.emptyLocation(nextx, nexty):
             childFish = Fish()
@@ -102,13 +102,13 @@ class Fish:
         randomOffsetIndex = random.randrange(len(offsetList))
         randomOffset = offsetList[randomOffsetIndex]
         nextx = self.xpos + randomOffset[0]
-        nexty = self.xpos + randomOffset[1]
+        nexty = self.ypos + randomOffset[1]
         while not (0 <= nextx < self.world.getXDimension() and
                    0 <= nexty < self.world.getYDimension() ):
                    randomOffsetIndex = random.randrange(len(offsetList))
                    randomOffset = offsetList[randomOffsetIndex]
                    nextx = self.xpos + randomOffset[0]
-                   nexty = self.xpos + randomOffset[1]
+                   nexty = self.ypos + randomOffset[1]
 
         if self.world.emptyLocation(nextx, nexty):
             self.move(nextx, nexty)

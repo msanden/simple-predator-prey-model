@@ -30,8 +30,8 @@ class World:
         #Defining the bounds of our world model
         self.wturtle = cTurtle.Turtle()
         self.wturtle.setWorldCoordinates(0,0,self.xDimension-1,self.yDimension-1)
-        self.wturtle.addshape("Bear.gif")
-        self.wturtle.addshape("Fish.gif")
+        self.wturtle.addshape("img/bear.gif")
+        self.wturtle.addshape("img/fish.gif")
         self.wturtle.hideturtle()
 
     def draw(self):
@@ -107,9 +107,9 @@ class World:
         if self.lifeForms != [ ]:
             creature = random.randrange(len(self.lifeForms))
             randomCreature = self.lifeForms[creature]
-            randomCreature.livelife()
+            randomCreature.liveLife()
 
     def delLifeForm(self, creature):
         creature.hide()
-        self.grid[creature.getYDimension()][creature.getXDimension()] = None
+        self.grid[creature.getY()][creature.getX()] = None
         self.lifeForms.remove(creature)

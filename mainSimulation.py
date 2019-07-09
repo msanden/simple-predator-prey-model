@@ -11,7 +11,7 @@ def mainSimulation():
     numberOfFish = 10
     worldLifeTime = 2500
     worldWidth = 50
-    worldLength = 25
+    worldLength = 50
 
     myworld = World(worldWidth, worldLength)
     myworld.draw()

@@ -19,7 +19,33 @@ class Bear:
         self.turtle = cTurtle.Turtle()
         self.turtle.up()
         self.turtle.hideturtle()
-        self.turtle.shape("bear.gif")
+        self.turtle.shape("img/bear.gif")
+
+    def getX(self):
+        return self.xpos
+    def getY(self):
+        return self.ypos
+
+    def setX(self, newx):
+        self.xpos = newx
+    def setY(self, newy):
+        self.ypos = newy
+    def setWorld(self, aworld):
+        self.world = aworld
+
+    def appear(self):
+        self.turtle.goto(self.xpos, self.ypos)
+        self.turtle.showturtle()
+
+    def hide(self):
+        self.turtle.hideturtle()
+
+    def move(self, newx, newy):
+        self.world.moveLifeForm(self.xpos, self.ypos, newx, newy)
+        self.xpos =  newx
+        self.ypos =  newy
+        self.turtle.goto(self.xpos, self.ypos)
+
 
     def liveLife(self):
         self.breedTick = self.breedTick + 1
@@ -42,7 +68,7 @@ class Bear:
             newx = self.xpos + offset[0]
             newy = self.ypos + offset[1]
             if 0 <= newx < self.world.getXDimension() and 0 <= newy < self.world.getYDimension():
-               if (not self.world.emptyLocation(newx,newy)) and isinstance(self.world.lookAtLocation(newx, newy, Fish)):
+               if (not self.world.emptyLocation(newx,newy)) and isinstance(self.world.lookAtLocation(newx, newy), Fish):
                    adjprey.append(self.world.lookAtLocation(newx, newy))
 
         if len(adjprey) > 0:
@@ -55,3 +81,41 @@ class Bear:
             self.starveTick = 0
         else:
             self.starveTick = self.starveTick + 1
+
+    def tryToBreed(self):
+        offsetList = [(-1,1), (0,1), (1,1),
+                      (-1,0),        (1,0),
+                      (-1,-1),(0,-1),(1,-1)]
+        randomOffsetIndex = random.randrange(len(offsetList))
+        randomOffset = offsetList[randomOffsetIndex]
+        nextx = self.xpos + randomOffset[0]
+        nexty = self.ypos + randomOffset[1]
+        while not (0 <= nextx < self.world.getXDimension() and
+                   0 <= nexty < self.world.getYDimension() ):
+                   randomOffsetIndex = random.randrange(len(offsetList))
+                   randomOffset = offsetList[randomOffsetIndex]
+                   nextx = self.xpos + randomOffset[0]
+                   nexty = self.ypos + randomOffset[1]
+
+        if self.world.emptyLocation(nextx, nexty):
+            childBear = Bear()
+            self.world.addLifeForm(childBear, nextx, nexty)
+            self.breedTick = 0
+
+    def tryToMove(self):
+        offsetList = [(-1,1), (0,1), (1,1),
+                      (-1,0),        (1,0),
+                      (-1,-1),(0,-1),(1,-1)]
+        randomOffsetIndex = random.randrange(len(offsetList))
+        randomOffset = offsetList[randomOffsetIndex]
+        nextx = self.xpos + randomOffset[0]
+        nexty = self.ypos + randomOffset[1]
+        while not (0 <= nextx < self.world.getXDimension() and
+                   0 <= nexty < self.world.getYDimension() ):
+                   randomOffsetIndex = random.randrange(len(offsetList))
+                   randomOffset = offsetList[randomOffsetIndex]
+                   nextx = self.xpos + randomOffset[0]
+                   nexty = self.ypos + randomOffset[1]
+
+        if self.world.emptyLocation(nextx, nexty):
+            self.move(nextx, nexty)
